@@ -7,6 +7,6 @@ terraform {
   backend "s3" {
     bucket = "3.devops.candidate.exam"
     region  = "ap-south-1"
-    Key     = "Elyahu.Eaton"
+    key     = "Elyahu.Eaton"
   }
 }
