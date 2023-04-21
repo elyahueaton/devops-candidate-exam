@@ -1,5 +1,10 @@
 pipeline{
     agent any
+    environment {
+        bucket_id = ""
+        vpc_id = ""
+        region = ""
+    }
     stages{
         stage("TF Init"){
             steps{
@@ -28,7 +33,15 @@ pipeline{
         stage("Invoke Lambda"){
             steps{
                 echo "Invoking your AWS Lambda"
+                sh "aws lambda invoke --function-name triggerPost.py output.txt"
             }
         }
     }
+}
+
+/* Example of Labda use */
+def updateLambda(functionName, bucketName, s3key, codeFileName, region, updateAlias = true, aliasName = "active") {
+    sh "aws s3 cp ${codeFileName} s3://${bucketName}/${s3key}"
+    sh "aws lambda update-function-code --function-name ${functionName} --s3-bucket ${bucketName} --s3-key ${s3key} --region ${region} --output json"
+    updateLambdaAlias(functionName,region,updateAlias,aliasName)
 }
