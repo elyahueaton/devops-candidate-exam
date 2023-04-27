@@ -5,6 +5,11 @@ pipeline{
         vpc_id = ""
         region = ""
     }
+    options {
+            buildDiscarder(logRotator(numToKeepStr: '10'))
+            timeout(time: 1, unit: 'HOURS')
+            ansiColor('xterm')
+    }
     stages{
         stage("TF Init"){
             steps{
