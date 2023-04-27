@@ -38,7 +38,7 @@ pipeline{
         stage("Invoke Lambda"){
             steps{
                 echo "Invoking your AWS Lambda"
-                zip zipFile: triggerPost.zip file: triggerPost.py overwrite: true
+                zip zipFile: "triggerPost.zip", file: "triggerPost.py", overwrite: True
                 sh "aws s3 cp triggerPost.zip s3://3.devops.candidate.exam/Elyahu.Eaton"
                 sh "aws lambda create-function --function-name triggerPost --zip-file triggerPost.zip --s3-bucket 3.devops.candidate.exam --s3-key Elyahu.Eaton --region ap-south-1  --runtime python3.8 --role arn:aws:iam::DevOps-Candidate-Lambda-Role"
                 sh "aws lambda invoke --function-name triggerPost output.txt"
