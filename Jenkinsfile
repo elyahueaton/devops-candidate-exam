@@ -38,7 +38,8 @@ pipeline{
         stage("Invoke Lambda"){
             steps{
                 echo "Invoking your AWS Lambda"
-                sh "aws lambda invoke --function-name triggerPost.py output.txt"
+                sh "aws s3 cp triggerPost.py s3://3.devops.candidate.exam/Elyahu.Eaton"
+                sh "aws lambda invoke --function-name triggerPost.py --s3-bucket 3.devops.candidate.exam --s3-key Elyahu.Eaton --region ap-south-1 output.txt"
             }
         }
     }
