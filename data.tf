@@ -10,7 +10,7 @@ data "aws_iam_role" "lambda" {
   name = "DevOps-Candidate-Lambda-Role"
 }
 
-data "aws_s3" "s3" {
+data "terraform_remote_state" "vpc"  {
   backend = "s3"
   config = {
     bucket = "3.devops.candidate.exam"
