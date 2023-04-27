@@ -9,3 +9,12 @@ data "aws_vpc" "vpc" {
 data "aws_iam_role" "lambda" {
   name = "DevOps-Candidate-Lambda-Role"
 }
+
+data "aws_s3" "s3" {
+  backend = "s3"
+  config = {
+    bucket = "3.devops.candidate.exam"
+    region  = "ap-south-1"
+    key     = "Elyahu.Eaton"
+  }
+}

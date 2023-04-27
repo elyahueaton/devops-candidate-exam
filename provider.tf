@@ -1,10 +1,5 @@
 provider "aws" {
   region  = "ap-south-1" # Don't change the region
-  backend "s3" {
-    bucket = "3.devops.candidate.exam"
-    region  = "ap-south-1"
-    key     = "Elyahu.Eaton"
-  }
 }
 /* 
 # Add your S3 backend configuration here
